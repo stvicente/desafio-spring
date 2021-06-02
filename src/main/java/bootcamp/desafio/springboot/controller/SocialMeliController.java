@@ -35,10 +35,10 @@ public class SocialMeliController {
         return socialMeliService.follow(userId, userIdToFollow);
     }
 
-//    @GetMapping(path = "/users/{userId}/followers/count")
-//    public ResponseEntity<CountFollowersDTO> follow(@PathVariable long userId){
-//        return ResponseEntity.ok(socialMeliService.countFollowers(userId));
-//    }
+    @GetMapping(path = "/users/{userId}/followers/count")
+    public ResponseEntity<CountFollowersDTO> follow(@PathVariable long userId){
+        return ResponseEntity.ok(socialMeliService.countFollowers(userId));
+    }
 //
 //    @GetMapping(path = "/users/{userId}/followers/list")
 //    public ResponseEntity<Seller> follow(@PathVariable long userId){
