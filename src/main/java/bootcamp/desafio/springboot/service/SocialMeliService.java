@@ -56,19 +56,19 @@ public class SocialMeliService {
         return "error";
     }
 
-//    public CountFollowersDTO countFollowers(long userId) {
-//        List<SellerFollowers> sellerFollowers = sellerFollowersRepository.findAll();
-//        int count = sellerFollowers.stream()
-//                .filter(sf -> sf.getSeller_id() == userId)
-//                .collect(Collectors.toList())
-//                .size();
-//        String userName = findUserById(userId).getName();
-//        CountFollowersDTO countFollowersDTO = new CountFollowersDTO();
-//        countFollowersDTO.setFollowersCount(count);
-//        countFollowersDTO.setUserId(userId);
-//        countFollowersDTO.setUserName(userName);
-//        return countFollowersDTO;
-//    }
+    public CountFollowersDTO countFollowers(long userId) {
+        List<SellerFollowers> sellerFollowers = sellerFollowersRepository.findAll();
+        int count = sellerFollowers.stream()
+                .filter(sf -> sf.getSeller_id() == userId)
+                .collect(Collectors.toList())
+                .size();
+        String userName = findUserById(userId).getName();
+        CountFollowersDTO countFollowersDTO = new CountFollowersDTO();
+        countFollowersDTO.setFollowersCount(count);
+        countFollowersDTO.setUserId(userId);
+        countFollowersDTO.setUserName(userName);
+        return countFollowersDTO;
+    }
 //
 //    public Object listFollowers(long userId) {
 //    }
