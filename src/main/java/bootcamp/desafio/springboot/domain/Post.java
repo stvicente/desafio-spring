@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Builder
+//@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,22 +23,9 @@ public class Post {
     private double price;
 
     @ManyToOne
-    private User userId;
-
-    @OneToMany
-    private List<Product> details;
+    private User user;
 
     public Post() {
-    }
-
-    public Post(long id, Date datePost, boolean hasPromo, String category, double price, User userId, List<Product> details) {
-        this.id = id;
-        this.datePost = datePost;
-        this.hasPromo = hasPromo;
-        this.category = category;
-        this.price = price;
-        this.userId = userId;
-        this.details = details;
     }
 
     public long getId() {
@@ -81,19 +68,11 @@ public class Post {
         this.price = price;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public List<Product> getDetails() {
-        return details;
-    }
-
-    public void setDetails(List<Product> details) {
-        this.details = details;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,11 +1,8 @@
 package bootcamp.desafio.springboot.controller;
 
-import bootcamp.desafio.springboot.domain.Post;
 import bootcamp.desafio.springboot.domain.User;
 import bootcamp.desafio.springboot.dto.CountFollowersDTO;
 import bootcamp.desafio.springboot.dto.FollowListDTO;
-import bootcamp.desafio.springboot.service.PostService;
-import bootcamp.desafio.springboot.service.SocialMeliService;
 import bootcamp.desafio.springboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,9 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("socialmeli")
 @RequiredArgsConstructor
 public class SocialMeliController {
-    private final SocialMeliService socialMeliService;
+//    private final SocialMeliService socialMeliService;
     private final UserService userService;
-    private final PostService postService;
+//    private final PostService postService;
 
     @GetMapping(path = "/healthcheck")
     public String healthCheck() {
@@ -26,12 +23,12 @@ public class SocialMeliController {
     }
 
     @PostMapping(path = "/users/client/create")
-    public ResponseEntity<User> saveClient(@RequestBody User user){
+    public ResponseEntity saveClient(@RequestBody User user){
         return new ResponseEntity(userService.saveClient(user), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/users/seller/create")
-    public ResponseEntity<User> saveSeller(@RequestBody User seller){
+    public ResponseEntity saveSeller(@RequestBody User seller){
         return new ResponseEntity(userService.saveSeller(seller), HttpStatus.CREATED);
     }
 
@@ -55,20 +52,15 @@ public class SocialMeliController {
         return ResponseEntity.ok(userService.listFollowers(userId));
     }
 
-    @PostMapping(path = "/products/newpost")
-    public ResponseEntity<Post> createPost(@RequestBody Post post){
-        return new ResponseEntity(postService.createPost(post), HttpStatus.CREATED);
-    }
-//
-////    8 e 9 ordenação deste
-//    @GetMapping(path = "/products/followed/{userId}/list")
-//    public ResponseEntity<Post> listPosts(@PathVariable long userId){
-//        return ResponseEntity.ok(socialMeliService.listPosts(userId));
+//    @GetMapping(path = "/users/{userId}/followed/list")
+//    public ResponseEntity<FollowListDTO> listFollowed(@PathVariable long userId){
+//        return ResponseEntity.ok(userService.listFollowed(userId));
 //    }
+
 //
-//    @PostMapping(path = "/users/{userId}/unfollow/{userIdToUnfollow}")
-//    public ResponseEntity<String> follow(@PathVariable long userId, @PathVariable long userIdToUnfollow){
-//        return ResponseEntity.ok(socialMeliService.unfollow(userId, userIdToUnfollow));
+//    @PostMapping(path = "/products/newpost")
+//    public ResponseEntity<Post> createPost(@RequestBody Post post){
+//        return new ResponseEntity(postService.createPost(post), HttpStatus.CREATED);
 //    }
 //
 //    @PostMapping(path = "/products/newpromopost")

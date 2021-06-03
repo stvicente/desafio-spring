@@ -1,9 +1,11 @@
 package bootcamp.desafio.springboot.domain;
 
+//import lombok.Builder;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,39 +16,30 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-//    @Column(name = "is_followable")
     private boolean isFollowable;
 
     public User(){ }
 
-    public User(long id, String name, boolean isFollowable) {
+    public User(long id, String name, boolean isFollowable, List<User> followed, List<User> follower) {
         this.id = id;
         this.name = name;
         this.isFollowable = isFollowable;
+        this.followed = followed;
+        this.follower = follower;
     }
 
-    public long getId() {
-        return id;
-    }
+    @ManyToMany
+    @JoinTable(name="seller_follower",
+            joinColumns=@JoinColumn(name="sellerId"),
+            inverseJoinColumns=@JoinColumn(name="clientId")
+    )
+    private List<User> followed;
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isFollowable() {
-        return isFollowable;
-    }
-
-    public void setFollowable(boolean followable) {
-        isFollowable = followable;
-    }
+    @ManyToMany
+    @JoinTable(name="seller_follower",
+            joinColumns=@JoinColumn(name="clientId"),
+            inverseJoinColumns=@JoinColumn(name="sellerId")
+    )
+    private List<User> follower;
 
 }

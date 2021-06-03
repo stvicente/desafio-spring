@@ -1,23 +1,13 @@
 package bootcamp.desafio.springboot.service;
 
-import bootcamp.desafio.springboot.domain.SellerFollowers;
-import bootcamp.desafio.springboot.domain.User;
 //import bootcamp.desafio.springboot.dto.UserPostRequestBody;
-import bootcamp.desafio.springboot.dto.CountFollowersDTO;
-import bootcamp.desafio.springboot.repository.SellerFollowersRepository;
-import bootcamp.desafio.springboot.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+//import bootcamp.desafio.springboot.repository.SellerFollowersRepository;
 //import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.*;
-import java.util.stream.Collectors;
 
-@Service
-@RequiredArgsConstructor
-public class SocialMeliService {
+//@Service
+//@RequiredArgsConstructor
+//public class SocialMeliService {
 //    private final UserRepository userRepository;
 //    private final SellerFollowersRepository sellerFollowersRepository;
 //
@@ -86,4 +76,4 @@ public class SocialMeliService {
 //    return followersList;
 //    }
 
-}
+//}
