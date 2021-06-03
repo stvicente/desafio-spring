@@ -3,7 +3,8 @@ package bootcamp.desafio.springboot.service;
 import bootcamp.desafio.springboot.domain.User;
 import bootcamp.desafio.springboot.dto.BaseDTO;
 import bootcamp.desafio.springboot.dto.CountFollowersDTO;
-import bootcamp.desafio.springboot.dto.FollowListDTO;
+import bootcamp.desafio.springboot.dto.FollowedListDTO;
+import bootcamp.desafio.springboot.dto.FollowersListDTO;
 import bootcamp.desafio.springboot.repository.SellerFollowersRepository;
 import bootcamp.desafio.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -75,43 +76,41 @@ public class UserService {
         return countFollowersDTO;
     }
 
-    public FollowListDTO listFollowers(long userId) {
-        User seller = findUserById(userId);
-        FollowListDTO followersList = new FollowListDTO();
-        if(seller.isFollowable()){
-            followersList.setUserId(seller.getId());
-            followersList.setUserName(seller.getName());
-            List<Long> followers = sellerFollowersRepository.findFollowers(userId);
-            List<BaseDTO> baseDTOS = new ArrayList<>();
-            for(long id : followers){
-                BaseDTO baseDTO = new BaseDTO();
-                baseDTO.setName(findUserById(id).getName());
-                baseDTO.setId(id);
-                baseDTOS.add(baseDTO);
-            }
-            followersList.setFollowers(baseDTOS);
+    public List<BaseDTO> listFollowerOrFollowed(long userId, String userType){
+        List<Long> users = null;
+        if(userType=="seller"){
+            users = sellerFollowersRepository.findFollowers(userId);
+        } else {
+            users = sellerFollowersRepository.findFollowed(userId);
         }
+        List<BaseDTO> baseDTOS = new ArrayList<>();
+        for(long id : users){
+            BaseDTO baseDTO = new BaseDTO();
+            baseDTO.setName(findUserById(id).getName());
+            baseDTO.setId(id);
+            baseDTOS.add(baseDTO);
+        };
+        return baseDTOS;
+    }
+
+    public FollowersListDTO listFollowers(long userId) {
+        User seller = findUserById(userId);
+        FollowersListDTO followersList = new FollowersListDTO();
+        followersList.setUserId(seller.getId());
+        followersList.setUserName(seller.getName());
+        List<BaseDTO> followers = listFollowerOrFollowed(seller.getId(), "seller");
+        followersList.setFollowers(followers);
         return followersList;
     }
 
-//    public Object listFollowed(long userId) {
-//    }
-//
-//    public FollowListDTO listFollowed(long userId) {
-//        FollowListDTO followedList = new FollowListDTO();
-//        followedList.setUserId(userId);
-//        followedList.setUserName(userRepository.findById(userId).get().getName());
-//        List<Long> followed = userRepository.findFollowed(userId);
-//        List<BaseDTO> baseDTOS = new ArrayList<>();
-//        for(long id : followed){
-//            BaseDTO baseDTO = new BaseDTO();
-//            baseDTO.setName(userRepository.findById(id).get().getName());
-//            baseDTO.setId(id);
-//            baseDTOS.add(baseDTO);
-//        }
-//        followedList.setFollowers(baseDTOS);
-//        return followedList;
-//
-//    }
+    public FollowedListDTO listFollowed(long userId) {
+        User client = findUserById(userId);
+        FollowedListDTO followedList = new FollowedListDTO();
+        followedList.setUserId(client.getId());
+        followedList.setUserName(client.getName());
+        List<BaseDTO> followed = listFollowerOrFollowed(client.getId(), "client");
+        followedList.setFollowed(followed);
+        return followedList;
+    }
 
 }

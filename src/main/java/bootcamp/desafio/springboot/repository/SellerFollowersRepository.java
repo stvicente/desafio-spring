@@ -22,6 +22,6 @@ public interface SellerFollowersRepository extends JpaRepository<User, User> {
     @Query(value = "SELECT client_id FROM seller_follower WHERE seller_id = ?1", nativeQuery = true)
     List<Long> findFollowers(long id);
 
-//    @Query(value = "SELECT seller_id FROM seller_follower WHERE client_id = ?1", nativeQuery = true)
-//    List<Long> findFollowed(long id);
+    @Query(value = "SELECT seller_id FROM seller_follower WHERE client_id = ?1", nativeQuery = true)
+    List<Long> findFollowed(long id);
 }
