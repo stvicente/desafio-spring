@@ -4,19 +4,16 @@ import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
 @Builder
+@Table(name = "sellers_followers")
 public class SellerFollowers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-//    @NaturalId
     private long seller_id;
     private long client_id;
 

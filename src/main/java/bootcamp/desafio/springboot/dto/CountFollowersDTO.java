@@ -1,6 +1,5 @@
 package bootcamp.desafio.springboot.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data

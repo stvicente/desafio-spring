@@ -8,11 +8,13 @@ import javax.persistence.*;
 @Data
 @Entity
 @Builder
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+//    @Column(name = "is_followable")
     private boolean isFollowable;
 
     public User(){ }
