@@ -5,12 +5,12 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class FollowListDTO {
+public class FollowersListDTO {
     private long userId;
     private String userName;
     private List<BaseDTO> followers;
     
-    public FollowListDTO() {
+    public FollowersListDTO() {
 
     }
 

@@ -2,7 +2,8 @@ package bootcamp.desafio.springboot.controller;
 
 import bootcamp.desafio.springboot.domain.User;
 import bootcamp.desafio.springboot.dto.CountFollowersDTO;
-import bootcamp.desafio.springboot.dto.FollowListDTO;
+import bootcamp.desafio.springboot.dto.FollowedListDTO;
+import bootcamp.desafio.springboot.dto.FollowersListDTO;
 import bootcamp.desafio.springboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,14 +49,14 @@ public class SocialMeliController {
     }
 
     @GetMapping(path = "/users/{userId}/followers/list")
-    public ResponseEntity<FollowListDTO> listFollowers(@PathVariable long userId){
+    public ResponseEntity<FollowersListDTO> listFollowers(@PathVariable long userId){
         return ResponseEntity.ok(userService.listFollowers(userId));
     }
 
-//    @GetMapping(path = "/users/{userId}/followed/list")
-//    public ResponseEntity<FollowListDTO> listFollowed(@PathVariable long userId){
-//        return ResponseEntity.ok(userService.listFollowed(userId));
-//    }
+    @GetMapping(path = "/users/{userId}/followed/list")
+    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable long userId){
+        return ResponseEntity.ok(userService.listFollowed(userId));
+    }
 
 //
 //    @PostMapping(path = "/products/newpost")
