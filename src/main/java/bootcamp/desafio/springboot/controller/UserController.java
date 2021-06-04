@@ -42,12 +42,12 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}/followers/count")
-    public ResponseEntity<CountFollowersDTO> countFollowers(@PathVariable long userId) {
+    public ResponseEntity<Object> countFollowers(@PathVariable long userId) {
         return ResponseEntity.ok(userService.countFollowers(userId));
     }
 
     @GetMapping(path = "/{userId}/followers/list")
-    public ResponseEntity<FollowersListDTO> listFollowers(@PathVariable long userId) {
+    public ResponseEntity<Object> listFollowers(@PathVariable long userId) {
         return ResponseEntity.ok(userService.listFollowers(userId));
     }
 
