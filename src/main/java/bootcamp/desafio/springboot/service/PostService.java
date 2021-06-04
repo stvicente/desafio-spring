@@ -48,15 +48,18 @@ public class PostService {
         }
         return products;
     }
-
+//
 //    public Object listPosts(long userId) {
 //    }
-//
+////
 //    public Object unfollow(long userId, long userIdToUnfollow) {
 //    }
 //
-//    public Object createPromoPost(Post post) {
-//    }
+    public Post createPromoPost(PostRequestDTO postRequest) {
+        Post promoPost = createPost(postRequest);
+        promoPost.setHasPromo(true);
+        return postRepository.save(promoPost);
+    }
 //
 //    public Object countPromo(long userId) {
 //    }

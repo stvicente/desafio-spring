@@ -18,9 +18,10 @@ public class Post {
 //    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date date;
-    private boolean hasPromo=false;
     private int category;
     private double price;
+    private boolean hasPromo=false;
+    private double discount=0;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
@@ -34,12 +35,13 @@ public class Post {
     public Post() {
     }
 
-    public Post(long id, Date date, boolean hasPromo, int category, double price, User user, List<Product> products) {
+    public Post(long id, Date date, int category, double price, boolean hasPromo, double discount, User user, List<Product> products) {
         this.id = id;
         this.date = date;
-        this.hasPromo = hasPromo;
         this.category = category;
         this.price = price;
+        this.hasPromo = hasPromo;
+        this.discount = discount;
         this.user = user;
         this.products = products;
     }
@@ -60,14 +62,6 @@ public class Post {
         this.date = date;
     }
 
-    public boolean isHasPromo() {
-        return hasPromo;
-    }
-
-    public void setHasPromo(boolean hasPromo) {
-        this.hasPromo = hasPromo;
-    }
-
     public int getCategory() {
         return category;
     }
@@ -82,6 +76,22 @@ public class Post {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public boolean isHasPromo() {
+        return hasPromo;
+    }
+
+    public void setHasPromo(boolean hasPromo) {
+        this.hasPromo = hasPromo;
+    }
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
     }
 
     public User getUser() {
@@ -104,12 +114,13 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "id=" + id +
-                ", date=" + date +
-                ", hasPromo=" + hasPromo +
-                ", category='" + category + '\'' +
-                ", price=" + price +
                 ", user=" + user +
+                ", date=" + date +
                 ", products=" + products +
+                ", category=" + category +
+                ", price=" + price +
+                ", hasPromo=" + hasPromo +
+                ", discount=" + discount +
                 '}';
     }
 }
