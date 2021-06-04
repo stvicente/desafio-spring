@@ -3,6 +3,8 @@ package bootcamp.desafio.springboot.service;
 import bootcamp.desafio.springboot.domain.Post;
 import bootcamp.desafio.springboot.domain.Product;
 import bootcamp.desafio.springboot.domain.User;
+import bootcamp.desafio.springboot.dto.BaseDTO;
+import bootcamp.desafio.springboot.dto.CountPromoDTO;
 import bootcamp.desafio.springboot.dto.PostRequestDTO;
 import bootcamp.desafio.springboot.repository.PostRepository;
 import bootcamp.desafio.springboot.repository.ProductRepository;
@@ -48,21 +50,29 @@ public class PostService {
         }
         return products;
     }
-//
+
 //    public Object listPosts(long userId) {
+//        User client = userRepository.getById(userId);
+//        List<User> follows = client.getFollowed();
+//        return follows;
 //    }
-////
-//    public Object unfollow(long userId, long userIdToUnfollow) {
-//    }
-//
+
     public Post createPromoPost(PostRequestDTO postRequest) {
         Post promoPost = createPost(postRequest);
         promoPost.setHasPromo(true);
         return postRepository.save(promoPost);
     }
-//
-//    public Object countPromo(long userId) {
-//    }
+
+    public Object countPromo(long userId) {
+        User seller = userRepository.getById(userId);
+        if(seller.isFollowable()){
+            List<Post> posts = seller.getPosts();
+            long count = posts.stream().filter(post -> post.isHasPromo()).count();
+            CountPromoDTO countPromo = new CountPromoDTO(seller.getId(), seller.getName(), count);
+            return countPromo;
+        }
+        return "Status Code 400 (Bad Request)";
+    }
 //
 //    public Object listPromos(long userId) {
 //    }
