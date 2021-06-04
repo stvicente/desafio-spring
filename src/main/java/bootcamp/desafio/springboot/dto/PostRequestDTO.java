@@ -22,6 +22,10 @@ public class PostRequestDTO {
         this.price = price;
     }
 
+    public PostRequestDTO() {
+
+    }
+
     public long getUserId() {
         return userId;
     }
