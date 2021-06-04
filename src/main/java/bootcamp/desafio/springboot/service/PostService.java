@@ -6,6 +6,7 @@ import bootcamp.desafio.springboot.domain.User;
 import bootcamp.desafio.springboot.dto.BaseDTO;
 import bootcamp.desafio.springboot.dto.CountPromoDTO;
 import bootcamp.desafio.springboot.dto.PostRequestDTO;
+import bootcamp.desafio.springboot.dto.PromoPostListDTO;
 import bootcamp.desafio.springboot.repository.PostRepository;
 import bootcamp.desafio.springboot.repository.ProductRepository;
 import bootcamp.desafio.springboot.repository.UserRepository;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +72,16 @@ public class PostService {
             long count = posts.stream().filter(post -> post.isHasPromo()).count();
             CountPromoDTO countPromo = new CountPromoDTO(seller.getId(), seller.getName(), count);
             return countPromo;
+        }
+        return "Status Code 400 (Bad Request)";
+    }
+
+    public Object listPromoPosts(long userId) {
+        User seller = userRepository.getById(userId);
+        if(seller.isFollowable()){
+            List<Post> posts = seller.getPosts().stream().filter(post -> post.isHasPromo()).collect(Collectors.toList());
+            PromoPostListDTO promoPostList = new PromoPostListDTO(seller.getId(), seller.getName(), posts);
+            return promoPostList;
         }
         return "Status Code 400 (Bad Request)";
     }

@@ -29,6 +29,11 @@ public class PostController {
         return new ResponseEntity(postService.countPromo(userId), HttpStatus.ACCEPTED);
     }
 
+    @GetMapping(path = "/{userId}/promo/list")
+    public ResponseEntity<Object> listPosts(@PathVariable long userId){
+        return ResponseEntity.ok(postService.listPromoPosts(userId));
+    }
+
     @PostMapping(path = "/newpost")
     public ResponseEntity<Post> createPost(@RequestBody PostRequestDTO post){
         return new ResponseEntity(postService.createPost(post), HttpStatus.CREATED);
@@ -39,10 +44,5 @@ public class PostController {
         return new ResponseEntity(postService.createPromoPost(post), HttpStatus.CREATED);
     }
 
-//
-//    @GetMapping(path = "/products/{userId}/promo/list/")
-//    public ResponseEntity<Post> listPosts(@PathVariable long userId){
-//        return ResponseEntity.ok(socialMeliService.listPromos(userId));
-//    }
 }
 
