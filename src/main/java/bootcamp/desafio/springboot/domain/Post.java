@@ -1,31 +1,47 @@
 package bootcamp.desafio.springboot.domain;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Data
 @Entity
-//@Builder
+@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 //    @Temporal(TemporalType.DATE)
-    private Date datePost;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date date;
     private boolean hasPromo=false;
-    private String category;
+    private int category;
     private double price;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userId", referencedColumnName = "id")
     private User user;
 
+//    @JsonIgnore
+    @OneToMany(mappedBy = "post")
+    private List<Product> products = new ArrayList<>();
+
     public Post() {
+    }
+
+    public Post(long id, Date date, boolean hasPromo, int category, double price, User user, List<Product> products) {
+        this.id = id;
+        this.date = date;
+        this.hasPromo = hasPromo;
+        this.category = category;
+        this.price = price;
+        this.user = user;
+        this.products = products;
     }
 
     public long getId() {
@@ -36,12 +52,12 @@ public class Post {
         this.id = id;
     }
 
-    public Date getDatePost() {
-        return datePost;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDatePost(Date datePost) {
-        this.datePost = datePost;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public boolean isHasPromo() {
@@ -52,11 +68,11 @@ public class Post {
         this.hasPromo = hasPromo;
     }
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -74,5 +90,26 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", date=" + date +
+                ", hasPromo=" + hasPromo +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                ", user=" + user +
+                ", products=" + products +
+                '}';
     }
 }
