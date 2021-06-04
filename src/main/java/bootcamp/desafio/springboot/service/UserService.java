@@ -1,10 +1,7 @@
 package bootcamp.desafio.springboot.service;
 
 import bootcamp.desafio.springboot.domain.User;
-import bootcamp.desafio.springboot.dto.BaseDTO;
-import bootcamp.desafio.springboot.dto.CountFollowersDTO;
-import bootcamp.desafio.springboot.dto.FollowedListDTO;
-import bootcamp.desafio.springboot.dto.FollowersListDTO;
+import bootcamp.desafio.springboot.dto.*;
 import bootcamp.desafio.springboot.repository.SellerFollowersRepository;
 import bootcamp.desafio.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +17,6 @@ import java.util.List;
 public class UserService {
     private final SellerFollowersRepository sellerFollowersRepository;
     private final UserRepository userRepository;
-//    boolean existsById(ID id);
 
     public List<User> listAll(){
         return userRepository.findAll();
