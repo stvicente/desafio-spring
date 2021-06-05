@@ -1,8 +1,5 @@
 package bootcamp.desafio.springboot.dto;
 
-import lombok.Data;
-
-@Data
 public class CountFollowersDTO {
     private long userId;
     private String userName;
@@ -10,12 +7,6 @@ public class CountFollowersDTO {
 
     public CountFollowersDTO() {
 
-    }
-
-    public CountFollowersDTO(long userId, String userName, int followersCount) {
-        this.userId = userId;
-        this.userName = userName;
-        this.followersCount = followersCount;
     }
 
     public long getUserId() {

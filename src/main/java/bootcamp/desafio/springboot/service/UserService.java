@@ -13,9 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -84,18 +82,6 @@ public class UserService {
         return "Status Code 400 (Bad Request)";
     }
 
-//    public Object listFollowers(long userId, String order) {
-//        System.out.println(order);
-//        User seller = findUserById(userId);
-//        if(seller.isFollowable() && order == null){
-//            return followersList(seller);
-//        } else if(seller.isFollowable() && order == "name_asc") {
-////            userRepository.findByAndSort(seller.getId(), Sort.by(seller.getPosts().getDate()));
-//            FollowersListDTO followers = followersList(seller);
-//
-//        }
-//        return "Status Code 400 (Bad Request)";
-//    }
 
     public List<BaseDTO> createBaseDTO(List<User> followers){
         List<BaseDTO> baseDTOS = new ArrayList<>();

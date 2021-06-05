@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-//    private final PostService postService;
 
     @GetMapping(path = "/healthcheck")
     public String healthCheck() {
