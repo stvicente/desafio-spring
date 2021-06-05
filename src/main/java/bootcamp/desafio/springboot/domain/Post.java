@@ -15,27 +15,28 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Temporal(TemporalType.TIMESTAMP)
 //    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date date;
     private int category;
     private double price;
-    private boolean hasPromo=false;
-    private double discount=0;
+    private boolean hasPromo = false;
+    private double discount = 0;
 
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="userId", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
-//    @JsonIgnore
+    //    @JsonIgnore
     @OneToMany(mappedBy = "post")
-    private List<Product> products = new ArrayList<>();
+    private List<Product> details = new ArrayList<>();
 
     public Post() {
     }
 
-    public Post(long id, Date date, int category, double price, boolean hasPromo, double discount, User user, List<Product> products) {
+    public Post(long id, Date date, int category, double price, boolean hasPromo, double discount, User user, List<Product> details) {
         this.id = id;
         this.date = date;
         this.category = category;
@@ -43,7 +44,7 @@ public class Post {
         this.hasPromo = hasPromo;
         this.discount = discount;
         this.user = user;
-        this.products = products;
+        this.details = details;
     }
 
     public long getId() {
@@ -102,25 +103,13 @@ public class Post {
         this.user = user;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Product> getDetails() {
+        return details;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", user=" + user +
-                ", date=" + date +
-                ", products=" + products +
-                ", category=" + category +
-                ", price=" + price +
-                ", hasPromo=" + hasPromo +
-                ", discount=" + discount +
-                '}';
+    public void setDetails(List<Product> details) {
+        this.details = details;
     }
 }
+
+

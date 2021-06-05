@@ -4,12 +4,14 @@ import bootcamp.desafio.springboot.domain.Post;
 
 import java.util.List;
 
-public class PromoPostListDTO {
+public class PostListDTO {
     public long userId;
     public String userName;
     public List<Post> posts;
 
-    public PromoPostListDTO(long userId, String userName, List<Post> posts) {
+    public PostListDTO(){}
+
+    public PostListDTO(long userId, String userName, List<Post> posts) {
         this.userId = userId;
         this.userName = userName;
         this.posts = posts;
