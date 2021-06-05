@@ -1,8 +1,7 @@
 package bootcamp.desafio.springboot.controller;
 
 import bootcamp.desafio.springboot.domain.User;
-import bootcamp.desafio.springboot.dto.*;
-import bootcamp.desafio.springboot.service.PostService;
+import bootcamp.desafio.springboot.dto.FollowedListDTO;
 import bootcamp.desafio.springboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final PostService postService;
+//    private final PostService postService;
 
     @GetMapping(path = "/healthcheck")
     public String healthCheck() {
@@ -47,12 +46,12 @@ public class UserController {
     }
 
     @GetMapping(path = "/{userId}/followers/list")
-    public ResponseEntity<Object> listFollowers(@PathVariable long userId) {
-        return ResponseEntity.ok(userService.listFollowers(userId));
+    public ResponseEntity<Object> listFollowers(@PathVariable long userId, @RequestParam(required=false) String order) {
+        return ResponseEntity.ok(userService.listFollowers(userId, order));
     }
 
     @GetMapping(path = "/{userId}/followed/list")
-    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable long userId) {
-        return ResponseEntity.ok(userService.listFollowed(userId));
+    public ResponseEntity<FollowedListDTO> listFollowed(@PathVariable long userId, @RequestParam(required=false) String order) {
+        return ResponseEntity.ok(userService.listFollowed(userId, order));
     }
 }

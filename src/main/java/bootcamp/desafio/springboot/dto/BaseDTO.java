@@ -4,13 +4,9 @@ public class BaseDTO {
     private long id;
     private String name;
 
-    public BaseDTO(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    public BaseDTO() {}
 
-    public BaseDTO() {
-
+    public BaseDTO(Long id, String name) {
     }
 
     public long getId() {

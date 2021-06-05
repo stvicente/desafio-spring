@@ -1,18 +1,14 @@
 
 package bootcamp.desafio.springboot.domain;
 
-//import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
-import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @Builder
-//@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +16,7 @@ public class User {
     private String name;
     private boolean isFollowable;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name="seller_follower",
             joinColumns=@JoinColumn(name="sellerId"),
@@ -27,6 +24,7 @@ public class User {
     )
     private List<User> follower;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name="seller_follower",
             joinColumns=@JoinColumn(name="clientId"),
@@ -39,12 +37,12 @@ public class User {
 
     public User(){}
 
-    public User(long id, String name, boolean isFollowable, List<User> followed, List<User> follower, List<Post> posts) {
+    public User(long id, String name, boolean isFollowable, List<User> follower, List<User> followed, List<Post> posts) {
         this.id = id;
         this.name = name;
         this.isFollowable = isFollowable;
-        this.followed = followed;
         this.follower = follower;
+        this.followed = followed;
         this.posts = posts;
     }
 
@@ -72,20 +70,20 @@ public class User {
         isFollowable = followable;
     }
 
-    public List<User> getFollowed() {
-        return followed;
-    }
-
-    public void setFollowed(List<User> followed) {
-        this.followed = followed;
-    }
-
     public List<User> getFollower() {
         return follower;
     }
 
     public void setFollower(List<User> follower) {
         this.follower = follower;
+    }
+
+    public List<User> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(List<User> followed) {
+        this.followed = followed;
     }
 
     public List<Post> getPosts() {
