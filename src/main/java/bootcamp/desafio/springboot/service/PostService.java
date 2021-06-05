@@ -12,10 +12,7 @@ import bootcamp.desafio.springboot.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -54,7 +51,11 @@ public class PostService {
         return products;
     }
 
-    public List<Post> listPostsSortedByDate(List<Post> posts, String order){
+    public List<Post> listPostsSortedByDate(List<Post> postList, String order){
+        Calendar twoWeeksAgo = Calendar.getInstance();
+        twoWeeksAgo.add(Calendar.DAY_OF_MONTH, -14);
+        Date twoWeeksAgoDate = twoWeeksAgo.getTime();
+        List<Post> posts = postList.stream().filter(p -> p.getDate().after(twoWeeksAgoDate)).collect(Collectors.toList());
         if(order.equals("date_asc")){
             posts.sort(Comparator.comparing(Post::getDate));
         } else if(order.equals("date_desc")){
@@ -80,7 +81,7 @@ public class PostService {
         return postList;
 
     }
-    
+
     public Post createPromoPost(PostRequestDTO postRequest) {
         Post promoPost = createPost(postRequest);
         promoPost.setHasPromo(true);
