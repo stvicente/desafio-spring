@@ -19,19 +19,19 @@ public class PostController {
         return "OK";
     }
 
-//    @GetMapping(path = "/followed/{userId}/list")
-//    public ResponseEntity<Object> listPosts(@PathVariable long userId) {
-//        return new ResponseEntity(postService.listPosts(userId), HttpStatus.ACCEPTED);
-//    }
-
     @GetMapping(path = "/{userId}/countPromo")
     public ResponseEntity<Object> countPromo(@PathVariable long userId){
         return new ResponseEntity(postService.countPromo(userId), HttpStatus.ACCEPTED);
     }
 
     @GetMapping(path = "/{userId}/promo/list")
-    public ResponseEntity<Object> listPosts(@PathVariable long userId){
+    public ResponseEntity<Object> listPromoPosts(@PathVariable long userId){
         return ResponseEntity.ok(postService.listPromoPosts(userId));
+    }
+
+    @GetMapping(path = "/followed/{userId}/list")
+    public ResponseEntity<Object> listPosts(@PathVariable long userId, @RequestParam(required = false) String order) {
+        return new ResponseEntity(postService.listPosts(userId, order), HttpStatus.ACCEPTED);
     }
 
     @PostMapping(path = "/newpost")
