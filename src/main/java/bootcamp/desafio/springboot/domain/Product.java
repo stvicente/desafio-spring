@@ -1,11 +1,9 @@
 package bootcamp.desafio.springboot.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 public class Product {
     @Id

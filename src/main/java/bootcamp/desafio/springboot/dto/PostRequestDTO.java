@@ -14,14 +14,6 @@ public class PostRequestDTO {
     private int category;
     private double price;
 
-    public PostRequestDTO(long userId, Date date, List<Product> details, int category, double price) {
-        this.userId = userId;
-        this.date = date;
-        this.details = details;
-        this.category = category;
-        this.price = price;
-    }
-
     public PostRequestDTO() {
 
     }
