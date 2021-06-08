@@ -1,10 +1,16 @@
 package bootcamp.desafio.springboot.dto;
 
-public class UserRequestDTO {
-    public String name;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-    public UserRequestDTO(String name) {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class UserRequestDTO {
+    private String name;
+    private boolean isFollowable;
+
+
+    public UserRequestDTO(String name, boolean isFollowable) {
         this.name = name;
+        this.isFollowable = isFollowable;
     }
 
     public String getName() {
@@ -13,5 +19,13 @@ public class UserRequestDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isFollowable() {
+        return isFollowable;
+    }
+
+    public void setFollowable(boolean followable) {
+        isFollowable = followable;
     }
 }

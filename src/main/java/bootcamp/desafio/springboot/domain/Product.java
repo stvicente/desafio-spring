@@ -15,10 +15,22 @@ public class Product {
     private String color;
     private String notes;
 
+    public Product(String productName, String type, String brand, String color, String notes) {
+        this.productName = productName;
+        this.type = type;
+        this.brand = brand;
+        this.color = color;
+        this.notes = notes;
+    }
+
     @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="postId", referencedColumnName = "id")
     private Post post;
+
+    public Product() {
+
+    }
 
     public long getId() {
         return id;
@@ -75,6 +87,4 @@ public class Product {
     public void setPost(Post post) {
         this.post = post;
     }
-
-    //    (fetch=FetchType.LAZY, cascade={ CascadeType.PERSIST, CascadeType.MERGE })
 }

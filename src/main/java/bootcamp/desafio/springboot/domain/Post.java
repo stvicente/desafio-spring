@@ -15,7 +15,6 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Temporal(TemporalType.TIMESTAMP)
-//    @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date date;
     private int category;
@@ -28,22 +27,26 @@ public class Post {
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
-    //    @JsonIgnore
     @OneToMany(mappedBy = "post")
     private List<Product> details = new ArrayList<>();
 
     public Post() {
     }
 
-    public Post(long id, Date date, int category, double price, boolean hasPromo, double discount, User user, List<Product> details) {
-        this.id = id;
+    public Post(Date date, int category, double price, User user) {
+        this.date = date;
+        this.category = category;
+        this.price = price;
+        this.user = user;
+    }
+
+    public Post(Date date, int category, double price, boolean hasPromo, double discount, User user) {
         this.date = date;
         this.category = category;
         this.price = price;
         this.hasPromo = hasPromo;
         this.discount = discount;
         this.user = user;
-        this.details = details;
     }
 
     public long getId() {

@@ -1,10 +1,7 @@
 package bootcamp.desafio.springboot.dto;
 
-import lombok.Data;
-
 import java.util.List;
 
-@Data
 public class FollowersListDTO {
     private long userId;
     private String userName;

@@ -36,12 +36,12 @@ public class PostController {
 
     @PostMapping(path = "/newpost")
     public ResponseEntity<Post> createPost(@RequestBody PostRequestDTO post){
-        return new ResponseEntity(postService.createPost(post), HttpStatus.CREATED);
+        return new ResponseEntity(postService.createPost(post, false), HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/newpromopost")
     public ResponseEntity<Post> createPromoPost(@RequestBody PostRequestDTO post){
-        return new ResponseEntity(postService.createPromoPost(post), HttpStatus.CREATED);
+        return new ResponseEntity(postService.createPost(post, true), HttpStatus.CREATED);
     }
 
 }

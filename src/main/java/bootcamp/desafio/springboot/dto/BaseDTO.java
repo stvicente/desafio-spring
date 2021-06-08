@@ -1,27 +1,29 @@
 package bootcamp.desafio.springboot.dto;
 
 public class BaseDTO {
-    private long id;
-    private String name;
+    private long userId;
+    private String userName;
 
-    public BaseDTO() {}
+    public BaseDTO(){}
 
-    public BaseDTO(Long id, String name) {
+    public BaseDTO(long userId, String userName) {
+        this.userId = userId;
+        this.userName = userName;
     }
 
-    public long getId() {
-        return id;
+    public long getUserId() {
+        return userId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
