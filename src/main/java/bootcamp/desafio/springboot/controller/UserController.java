@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping(path = "/create")
     public ResponseEntity saveUser(@RequestBody UserRequestDTO user) {
-        return ResponseEntity.ok(userService.saveUser(user));
+        return ResponseEntity.ok(userService.createUser(user));
     }
 
     @PostMapping(path = "/{userId}/follow/{userIdToFollow}")

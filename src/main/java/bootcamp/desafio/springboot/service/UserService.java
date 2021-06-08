@@ -24,9 +24,9 @@ public class UserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found"));
     }
 
-    public Object saveUser(UserRequestDTO userRequest) {
+    public Object createUser(UserRequestDTO userRequest) {
         try {
-            User user = User.builder().name(userRequest.getName()).build();
+            User user = new User(userRequest.getName(), userRequest.isFollowable());
             return userRepository.save(user);
         } catch (BadRequestException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -38,7 +38,7 @@ public class UserService {
             User client = findUserById(userId);
             User seller = findUserById(userIdToFollow);
             if(seller.isFollowable() && seller.getId() != client.getId()){
-                List follower = seller.getFollower();
+                List<User> follower = seller.getFollower();
                 follower.add(client);
                 seller.setFollower(follower);
                 userRepository.save(seller);
@@ -55,7 +55,10 @@ public class UserService {
             User seller = findUserById(userIdToUnfollow);
             User client = findUserById(userId);
             if (seller.isFollowable() && seller.getId() != client.getId()) {
-                List follower = seller.getFollower();
+                List<User> follower = seller.getFollower();
+                if(!follower.contains(client)){
+                    return new ResponseEntity<>("Seller is not followed", HttpStatus.BAD_REQUEST);
+                }
                 follower.remove(client);
                 seller.setFollower(follower);
                 userRepository.save(seller);
@@ -71,7 +74,7 @@ public class UserService {
         try {
             User seller = findUserById(userId);
             if(seller.isFollowable()){
-                List following = seller.getFollower();
+                List<User> following = seller.getFollower();
                 CountFollowersDTO count = new CountFollowersDTO();
                 count.setFollowersCount(following.size());
                 count.setUserId(userId);
@@ -121,7 +124,7 @@ public class UserService {
         } catch (BadRequestException e){
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return new ResponseEntity<>("User can not be followed", HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest();
     }
 
     public Object listFollowed(long userId, String order) {

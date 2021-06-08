@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,10 +34,15 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
-    public User(){}
+    public User() {
+    }
 
-    public User(long id, String name, boolean isFollowable, List<User> follower, List<User> followed, List<Post> posts) {
-        this.id = id;
+    public User(String name, boolean isFollowable) {
+        this.name = name;
+        this.isFollowable = isFollowable;
+    }
+
+    public User(String name, boolean isFollowable, List<User> follower, List<User> followed, List<Post> posts) {
         this.name = name;
         this.isFollowable = isFollowable;
         this.follower = follower;

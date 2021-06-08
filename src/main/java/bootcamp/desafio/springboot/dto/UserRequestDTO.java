@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRequestDTO {
     private String name;
-    private boolean followable;
+    private boolean isFollowable;
 
 
-    public UserRequestDTO(String name, boolean followable) {
+    public UserRequestDTO(String name, boolean isFollowable) {
         this.name = name;
-        this.followable = followable;
+        this.isFollowable = isFollowable;
     }
 
     public String getName() {
@@ -22,10 +22,10 @@ public class UserRequestDTO {
     }
 
     public boolean isFollowable() {
-        return followable;
+        return isFollowable;
     }
 
     public void setFollowable(boolean followable) {
-        this.followable = followable;
+        isFollowable = followable;
     }
 }
