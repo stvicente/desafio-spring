@@ -8,6 +8,8 @@ docker compose up
 
 <h3>- Rodar a aplicação</h3>
 
+<h3><a href="http://localhost:8080/swagger-ui.html#"/>Swagger</a><h3>
+
 <h2>Para testar a aplicação acesse a <a href="https://www.getpostman.com/collections/348962ebf4c6610ed5c0">Postman collection</a></h2>
 
 <h2>Endpoints:</h2>
