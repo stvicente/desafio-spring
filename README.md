@@ -2,9 +2,9 @@
 <h2>Instruções:</h2>
 
 <h3>- Com o projeto aberto no terminal rodar o comando para iniciar o banco de dados:</h3>
-```shell
+
 docker compose up
-```
+
 
 <h3>- Rodar a aplicação</h3>
 
