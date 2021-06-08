@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: mysql
+    container_name: desafio_springboot
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - desafio_springboot:/var/lib/mysql
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+volumes:
+  desafio_springboot:
